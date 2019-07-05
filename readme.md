@@ -746,13 +746,13 @@ function subscribe(listener) {
   listeners.push(listener);
   return function unsubscribe() {
     const index = listeners.indexOf(listener);
-    listenrs.splice(index);
+    listeners.splice(index);
   };
 }
 
 function dispatch(action) {
   state = reducer(state, action);
-  let copy = listeners;
+  let copy = listeners.slice();
   for (let i = 0; i < copy.length; i++) {
     copy[i]();
   }
@@ -774,7 +774,7 @@ unsub();
 ```js
 let chain = middlewares.map(item => {
   //return item(store);
-  return item({ store: store.getState });
+  return item({ getState: store.getState });
 });
 ```
 

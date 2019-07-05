@@ -5,7 +5,7 @@ export default function applyMiddleware (...middlewares) {
         let store = oldCreateStore(reducer,initstate);
         //给所有中间件传入store
         let chain = middlewares.map(item => {
-          return item({store:store.getState});
+          return item({getState:store.getState});
         })
         //组合中间件
         let dispatch = store.dispatch;

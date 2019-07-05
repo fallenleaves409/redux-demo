@@ -13,7 +13,7 @@ let reducer = combineReducers({
 })
 
 let rewritefunc = applyMiddleware(exceptMiddleware,timeMiddleware,loggerMiddleware);
-let store = createStore(reducer, {} , rewritefunc);
+let store = createStore(reducer,  rewritefunc);
 
 
 store.subscribe(() => {
@@ -21,10 +21,17 @@ store.subscribe(() => {
     console.log(state.counter.count);
 })
 
-store.subscribe(() => {
+let unsub = store.subscribe(() => {
     let state = store.getState();
     console.log(state.info.name + state.info.description);
 })
+
+store.dispatch({
+    type: 'DECREMENT'
+})
+
+unsub();
+
 
 store.dispatch({
     type: 'DECREMENT'

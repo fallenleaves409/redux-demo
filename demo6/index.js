@@ -27,7 +27,7 @@ store.subscribe(() => {
 })
 
 store.dispatch({
-    type: 'DECREMENT'
+    type: 'INCREMENT'
 })
 
 
